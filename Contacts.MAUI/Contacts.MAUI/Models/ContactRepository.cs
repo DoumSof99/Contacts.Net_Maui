@@ -10,11 +10,11 @@ namespace Contacts.MAUI.Models
     {
         public static List<Contact> _contacts = new List<Contact>()
         {
-            new Contact() { Name = "Sofia", Email="SofDoum@email.com" },
-            new Contact() { Name = "Irini", Email="Irini@email.com" },
-            new Contact() { Name = "Maria", Email="Maria@email.com" },
-            new Contact() { Name = "Menia", Email="Menia@email.com" },
-            new Contact() { Name = "Agapi", Email="Agapi@email.com" }
+            new Contact() { ContactId = 1, Name = "Sofia", Email="SofDoum@email.com" },
+            new Contact() { ContactId = 2, Name = "Irini", Email="Irini@email.com" },
+            new Contact() { ContactId = 3, Name = "Maria", Email="Maria@email.com" },
+            new Contact() { ContactId = 4, Name = "Menia", Email="Menia@email.com" },
+            new Contact() { ContactId = 5, Name = "Agapi", Email="Agapi@email.com" }
         };
 
         public static List<Contact> GetContacts() => _contacts;
