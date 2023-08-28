@@ -12,4 +12,18 @@ public partial class AddContactPage : ContentPage
         Shell.Current.GoToAsync($"//{nameof(ContactPage)}"); // or ".."
     }
 
+    private void contactCtrl_OnSave(object sender, EventArgs e)
+    {
+
+    }
+
+    private void contactCtrl_OnCancel(object sender, EventArgs e)
+    {
+
+    }
+
+    private void contactCtrl_OnError(object sender, string e)
+    {
+
+    }
 }
