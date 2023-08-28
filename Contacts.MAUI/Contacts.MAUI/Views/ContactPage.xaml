@@ -4,7 +4,10 @@
              x:Class="Contacts.MAUI.Views.ContactPage"
              Title="Contact">
 
-    <Grid RowDefinitions="*, 50" ColumnDefinitions="*">
+    <Grid 
+        Padding="5"
+        RowDefinitions="*, 50" 
+        ColumnDefinitions="*">
         <ListView 
             Grid.Row="0"
             Grid.Column="0"
