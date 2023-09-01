@@ -1,6 +1,12 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
+using Contacts.Plugins.DataStore.InMemory;
+using Contacts.UseCases.PluginInterfaces;
+using Contacts.UseCases.Interfaces;
+using Contacts.MAUI.Views;
+using Contacts.UseCases;
+
 namespace Contacts.MAUI
 {
     public static class MauiProgram
@@ -20,6 +26,10 @@ namespace Contacts.MAUI
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<IContactRepository, ContactInMemoryRepository>();
+            builder.Services.AddSingleton<IViewContactsUseCase, ViewContactsUseCase>();
+
+            builder.Services.AddSingleton<ContactPage>();
 
             return builder.Build();
         }
