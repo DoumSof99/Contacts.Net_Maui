@@ -66,7 +66,7 @@ namespace Contacts.MAUI.Models
             }
         }
 
-        internal static List<Contact> SearchContacts(string filterText)
+        public static List<Contact> SearchContacts(string filterText)
         {
             var contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
 
