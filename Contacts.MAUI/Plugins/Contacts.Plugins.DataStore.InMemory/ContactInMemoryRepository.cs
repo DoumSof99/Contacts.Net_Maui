@@ -20,6 +20,23 @@ namespace Contacts.Plugins.DataStore.InMemory
             };
         }
 
+        public Task<Contact> GetContactByIdAsync(int contactId)
+        {
+            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if (contact != null)
+            {
+                return Task.FromResult(new Contact
+                {
+                    ContactId = contact.ContactId,
+                    Address = contact.Address,
+                    Email = contact.Email,
+                    Name = contact.Name,
+                    Phone = contact.Phone
+                });
+            }
+            return null;
+        }
+
         public Task<List<Contact>> GetContactsAsync(string filterText)
         {
 

@@ -26,7 +26,7 @@ public partial class ContactPage : ContentPage
     {
         if (listContacts.SelectedItem != null)
         {
-            await Shell.Current.GoToAsync($"{nameof(EditContactPage)}?Id={((Contact)listContacts.SelectedItem).ContactId}");
+            await Shell.Current.GoToAsync($"{nameof(EditContactPage)}?Id={((CoreBusiness.Contact)listContacts.SelectedItem).ContactId}");
         }
     }
 
@@ -58,7 +58,6 @@ public partial class ContactPage : ContentPage
 
     private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        //var contacts = new ObservableCollection<Contact>(ContactRepository.SearchContacts(((SearchBar)sender).Text));
         var contacts = new ObservableCollection<CoreBusiness.Contact>(await this.viewContactsUseCase.ExecuteAsync(((SearchBar)sender).Text));
 
         listContacts.ItemsSource = contacts;
