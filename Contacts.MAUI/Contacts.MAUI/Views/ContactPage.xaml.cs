@@ -52,7 +52,6 @@ public partial class ContactPage : ContentPage
     private async void LoadContacts()
     {
         var contacts = new ObservableCollection<CoreBusiness.Contact>(await this.viewContactsUseCase.ExecuteAsync(string.Empty));
-
         listContacts.ItemsSource = contacts;
     }
 
