@@ -20,23 +20,6 @@ namespace Contacts.Plugins.DataStore.InMemory
             };
         }
 
-        public Task<Contact> GetContactByIdAsync(int contactId)
-        {
-            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
-            if (contact != null)
-            {
-                return Task.FromResult(new Contact
-                {
-                    ContactId = contact.ContactId,
-                    Address = contact.Address,
-                    Email = contact.Email,
-                    Name = contact.Name,
-                    Phone = contact.Phone
-                });
-            }
-            return null;
-        }
-
         public Task<List<Contact>> GetContactsAsync(string filterText)
         {
 
@@ -54,14 +37,31 @@ namespace Contacts.Plugins.DataStore.InMemory
             if (contacts == null || contacts.Count <= 0)
                 contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Address) && x.Address.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
             else
-                return Task.FromResult(contacts); ;
+                return Task.FromResult(contacts); 
 
             if (contacts == null || contacts.Count <= 0)
                 contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Phone) && x.Phone.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
             else
-                return Task.FromResult(contacts); ;
+                return Task.FromResult(contacts); 
 
-            return Task.FromResult(contacts); ;
+            return Task.FromResult(contacts); 
+        }
+       
+        public Task<Contact> GetContactByIdAsync(int contactId)
+        {
+            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if (contact != null)
+            {
+                return Task.FromResult(new Contact
+                {
+                    ContactId = contact.ContactId,
+                    Address = contact.Address,
+                    Email = contact.Email,
+                    Name = contact.Name,
+                    Phone = contact.Phone
+                });
+            }
+            return null;
         }
     }
 }

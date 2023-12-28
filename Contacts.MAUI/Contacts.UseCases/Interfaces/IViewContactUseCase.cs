@@ -1,7 +1,9 @@
-﻿namespace Contacts.UseCases.Interfaces
+﻿using Contact = Contacts.CoreBusiness.Contact;
+
+namespace Contacts.UseCases.Interfaces
 {
     public interface IViewContactUseCase
     {
-        Task<CoreBusiness.Contact> ExecuteAsync(int contactId);
+        Task<Contact> ExecuteAsync(int contactId);
     }
 }
