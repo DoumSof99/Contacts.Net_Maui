@@ -9,11 +9,13 @@ public partial class EditContactPage : ContentPage
 {
 	private CoreBusiness.Contact contact;
     private readonly IViewContactUseCase viewContactUseCase;
+    private readonly IEditContactUseCase editContactUseCase;
 
-    public EditContactPage(IViewContactUseCase viewContactUseCase)
+    public EditContactPage(IViewContactUseCase viewContactUseCase, IEditContactUseCase editContactUseCase)
 	{
 		InitializeComponent();
         this.viewContactUseCase = viewContactUseCase;
+        this.editContactUseCase = editContactUseCase;
     }
 
 	public string ContactId { 
@@ -30,16 +32,15 @@ public partial class EditContactPage : ContentPage
         } 
 	}
 
-    private void btnUpdate_Clicked(object sender, EventArgs e)
+    private async void btnUpdate_Clicked(object sender, EventArgs e)
     {
         contact.Name = contactCtrl.Name;
         contact.Email = contactCtrl.Email;
         contact.Phone = contactCtrl.Phone;
         contact.Address = contactCtrl.Address;
 
-
-        //ContactRepository.UpdeteContact(contact.ContactId, contact);
-        Shell.Current.GoToAsync($"//{nameof(ContactPage)}");
+        await editContactUseCase.ExecuteAsync(contact.ContactId, contact);
+        await Shell.Current.GoToAsync($"//{nameof(ContactPage)}");
     }
 
     private void btnCancel_Clicked(object sender, EventArgs e)

@@ -63,5 +63,19 @@ namespace Contacts.Plugins.DataStore.InMemory
             }
             return null;
         }
+
+        public Task UpdateContactAsync(int contactId, Contact contact) {
+            if (contactId != contact.ContactId) return Task.CompletedTask;
+
+            var contactToUpdate = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if (contactToUpdate != null) {
+                //AutoMapper
+                contactToUpdate.Email = contact.Email;
+                contactToUpdate.Name = contact.Name;
+                contactToUpdate.Address = contact.Address;
+                contactToUpdate.Phone = contact.Phone;
+            }
+            return Task.CompletedTask;
+        }
     }
 }
