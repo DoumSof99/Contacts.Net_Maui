@@ -1,18 +1,21 @@
 using Contacts.MAUI.Models;
 using Contacts.UseCases.Interfaces;
 using System.Collections.ObjectModel;
-using Contact = Contacts.MAUI.Models.Contact;
+using Contact = Contacts.CoreBusiness.Contact;
 
 namespace Contacts.MAUI.Views;
 
 public partial class ContactPage : ContentPage
 {
     private readonly IViewContactsUseCase viewContactsUseCase;
+    private readonly IDeleteContactUseCase deleteContactUseCase;
 
-    public ContactPage(IViewContactsUseCase viewContactsUseCase)
+    public ContactPage(IViewContactsUseCase viewContactsUseCase,
+        IDeleteContactUseCase deleteContactUseCase)
 	{
 		InitializeComponent();
         this.viewContactsUseCase = viewContactsUseCase;
+        this.deleteContactUseCase = deleteContactUseCase;
     }
 
     protected override void OnAppearing()
@@ -26,7 +29,7 @@ public partial class ContactPage : ContentPage
     {
         if (listContacts.SelectedItem != null)
         {
-            await Shell.Current.GoToAsync($"{nameof(EditContactPage)}?Id={((CoreBusiness.Contact)listContacts.SelectedItem).ContactId}");
+            await Shell.Current.GoToAsync($"{nameof(EditContactPage)}?Id={((Contact)listContacts.SelectedItem).ContactId}");
         }
     }
 
@@ -40,24 +43,24 @@ public partial class ContactPage : ContentPage
         Shell.Current.GoToAsync(nameof(AddContactPage));
     }
 
-    private void Delete_Clicked(object sender, EventArgs e)
+    private async void Delete_Clicked(object sender, EventArgs e)
     {
         var menuItem = sender as MenuItem;
         var contact = menuItem.CommandParameter as Contact;
-        ContactRepository.DeleteContact(contact.ContactId);
+        await deleteContactUseCase.ExecuteAsync(contact.ContactId);
 
         LoadContacts();
     }
     
     private async void LoadContacts()
     {
-        var contacts = new ObservableCollection<CoreBusiness.Contact>(await this.viewContactsUseCase.ExecuteAsync(string.Empty));
+        var contacts = new ObservableCollection<Contact>(await this.viewContactsUseCase.ExecuteAsync(string.Empty));
         listContacts.ItemsSource = contacts;
     }
 
     private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var contacts = new ObservableCollection<CoreBusiness.Contact>(await this.viewContactsUseCase.ExecuteAsync(((SearchBar)sender).Text));
+        var contacts = new ObservableCollection<Contact>(await this.viewContactsUseCase.ExecuteAsync(((SearchBar)sender).Text));
 
         listContacts.ItemsSource = contacts;
 
