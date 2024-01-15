@@ -77,5 +77,12 @@ namespace Contacts.Plugins.DataStore.InMemory
             }
             return Task.CompletedTask;
         }
+
+        public Task AddContactAsync(Contact contact) {
+            var maxId = _contacts.Max(x => x.ContactId);
+            contact.ContactId = maxId + 1;
+            _contacts.Add(contact);
+            return Task.CompletedTask;
+        }
     }
 }

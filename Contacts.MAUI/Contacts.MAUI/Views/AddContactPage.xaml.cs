@@ -1,23 +1,31 @@
 using Contacts.MAUI.Models;
+using Contacts.UseCases;
+using Contacts.UseCases.Interfaces;
+using Contact = Contacts.CoreBusiness.Contact;
 
 namespace Contacts.MAUI.Views;
 
 public partial class AddContactPage : ContentPage
 {
-	public AddContactPage()
+    private IAddContactUseCase addContactUseCase;
+	public AddContactPage(IAddContactUseCase addContactUseCase)
 	{
 		InitializeComponent();
+        this.addContactUseCase = addContactUseCase;
 	}
 
-    private void contactCtrl_OnSave(object sender, EventArgs e)
+    private async void contactCtrl_OnSave(object sender, EventArgs e)
     {
-        ContactRepository.AddContact(new Models.Contact { 
+        
+        await addContactUseCase.ExecuteAsync(new Contact
+        {
             Name = contactCtrl.Name,
             Email = contactCtrl.Email,
             Address = contactCtrl.Address,
             Phone = contactCtrl.Phone
         });
-        Shell.Current.GoToAsync($"//{nameof(ContactPage)}"); // or ".."
+
+        await Shell.Current.GoToAsync($"//{nameof(ContactPage)}"); // or ".."
     }
 
     private void contactCtrl_OnCancel(object sender, EventArgs e)
