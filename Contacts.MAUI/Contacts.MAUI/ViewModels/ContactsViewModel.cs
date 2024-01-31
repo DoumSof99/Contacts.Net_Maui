@@ -16,6 +16,7 @@ namespace Contacts.MAUI.ViewModels {
         public ContactsViewModel(IViewContactsUseCase viewContactsUseCase)
         {
             this.viewContactsUseCase = viewContactsUseCase;
+            this.Contacts = new ObservableCollection<Contact>();
         }
 
         public async Task LoadContactsAsync() {
