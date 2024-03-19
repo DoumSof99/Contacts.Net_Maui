@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Contacts.MAUI.Models;
-using Contact = Contacts.MAUI.Models.Contact;
+using Contacts.UseCases.Interfaces;
+using Contact = Contacts.CoreBusiness.Contact;
 
 namespace Contacts.MAUI.ViewModels {
     public partial class ContactViewModel : ObservableObject {
         private Contact contact;
+        private readonly IViewContactUseCase viewContactUseCase;
+
         public Contact Contact {
             get => contact;
             set {
@@ -18,18 +21,19 @@ namespace Contacts.MAUI.ViewModels {
             }
         }
 
-        public ContactViewModel()
+        public ContactViewModel(IViewContactUseCase viewContactUseCase)
         {
             this.Contact = new Contact();
+            this.viewContactUseCase = viewContactUseCase;
         }
 
-        public void LoadContact(int contactId) {
-            this.Contact = ContactRepository.GetContactById(contactId);
+        public async void LoadContact(int contactId) {
+            this.Contact = await this.viewContactUseCase.ExecuteAsync(contactId);
         }
 
-        [RelayCommand]
-        public void SaveContact() {
-            ContactRepository.UpdeteContact(this.Contact.ContactId, this.Contact);
-        }
+        //[RelayCommand]
+        //public void SaveContact() {
+        //    ContactRepository.UpdeteContact(this.Contact.ContactId, this.Contact);
+        //}
     }
 }
