@@ -27,7 +27,7 @@ namespace Contacts.MAUI.ViewModels {
             this.viewContactUseCase = viewContactUseCase;
         }
 
-        public async void LoadContact(int contactId) {
+        public async Task LoadContact(int contactId) {
             this.Contact = await this.viewContactUseCase.ExecuteAsync(contactId);
         }
 

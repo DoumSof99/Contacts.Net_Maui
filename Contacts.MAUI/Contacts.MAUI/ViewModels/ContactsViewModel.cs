@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Contacts.MAUI.Views_MVVM;
 using Contacts.UseCases.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace Contacts.MAUI.ViewModels {
 
         [RelayCommand]
         public async Task EditContact(int contactId) {
-            await Shell.Current.GoToAsync($"{nameof(EditContactPage_MVVM)}?id={contactId}");
+            await Shell.Current.GoToAsync($"{nameof(EditContactPage_MVVM)}?Id={contactId}");
         }
     }
 }
