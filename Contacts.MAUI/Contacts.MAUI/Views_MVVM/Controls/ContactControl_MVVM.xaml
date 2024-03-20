@@ -61,8 +61,8 @@
             </HorizontalStackLayout>
         </Frame>
 
-        <Button x:Name="btnSave" Text="Save"></Button>
-        <Button x:Name="btnCancel" Text="Cancel"></Button>
+        <Button x:Name="btnSave" Text="Save" Command="{Binding EditContactCommand}"></Button>
+        <Button x:Name="btnCancel" Text="Cancel" Command="{Binding BackToContactCommand}"></Button>
 
     </VerticalStackLayout>
 
