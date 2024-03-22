@@ -15,6 +15,7 @@ namespace Contacts.MAUI.ViewModels {
         private Contact contact;
         private readonly IViewContactUseCase viewContactUseCase;
         private readonly IEditContactUseCase editContactUseCase;
+        private readonly IAddContactUseCase addContactUseCase;
 
         public Contact Contact {
             get => contact;
@@ -24,11 +25,13 @@ namespace Contacts.MAUI.ViewModels {
         }
 
         public ContactViewModel(IViewContactUseCase viewContactUseCase,
-                                IEditContactUseCase editContactUseCase)
+                                IEditContactUseCase editContactUseCase,
+                                IAddContactUseCase addContactUseCase)
         {
             this.Contact = new Contact();
             this.viewContactUseCase = viewContactUseCase;
             this.editContactUseCase = editContactUseCase;
+            this.addContactUseCase = addContactUseCase;
         }
 
         public async Task LoadContact(int contactId) {
@@ -38,6 +41,12 @@ namespace Contacts.MAUI.ViewModels {
         [RelayCommand]
         public async Task EditContact() {
             await this.editContactUseCase.ExecuteAsync(this.contact.ContactId, this.contact);
+            await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+        }
+
+        [RelayCommand]
+        public async Task AddContact() {
+            await this.addContactUseCase.ExecuteAsync(this.contact);
             await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
         }
 

@@ -16,6 +16,7 @@ namespace Contacts.MAUI
 
             Routing.RegisterRoute(nameof(Contacts_MVVM_Page), typeof(Contacts_MVVM_Page));
             Routing.RegisterRoute(nameof(EditContactPage_MVVM), typeof(EditContactPage_MVVM));
+            Routing.RegisterRoute(nameof(AddContactPage_MVVM), typeof(AddContactPage_MVVM));
         }
     }
 }
