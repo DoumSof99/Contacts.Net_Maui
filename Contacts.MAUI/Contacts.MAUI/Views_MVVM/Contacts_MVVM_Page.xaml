@@ -14,10 +14,11 @@
     RowSpacing="5">
 
         <SearchBar
-        Grid.Row="0"
-        Grid.Column="0"
-        x:Name="ctrlSearchBar"
-        Placeholder="Search Contact">
+            x:Name="ctrlSearchBar"
+            Grid.Row="0"
+            Grid.Column="0"
+            Placeholder="Search Contact"
+            Text="{Binding FilterText}">
 
         </SearchBar>
 
