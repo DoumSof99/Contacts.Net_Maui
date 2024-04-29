@@ -26,6 +26,20 @@ app.MapGet("/api/contacts", async (ApplicationDBContext db) => {
     return Results.Ok(contacts);
 });
 
+app.MapPut("/api/contacts/{id}", async (int id, Contact contact, ApplicationDBContext db) => {
+    var contactsToUpdate = await db.Contacts.FindAsync(id);
+
+    if (contactsToUpdate is null) return Results.NotFound();
+
+    contactsToUpdate.Name = contact.Name;
+    contactsToUpdate.Email = contact.Email;
+    contactsToUpdate.Phone = contact.Phone;
+    contactsToUpdate.Address = contact.Address;
+
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
 app.Run();
 
 
