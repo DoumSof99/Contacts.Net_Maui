@@ -1,5 +1,6 @@
 using Contacts.WebAPI;
 using Contacts.WebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +22,21 @@ app.MapPost("/api/contacts", async (Contact contact, ApplicationDBContext db) =>
     await db.SaveChangesAsync();
 });
 
-app.MapGet("/api/contacts", async (ApplicationDBContext db) => {
-    var contacts = await db.Contacts.ToListAsync();
+app.MapGet("/api/contacts", async ([FromQuery]string? s, ApplicationDBContext db) => {
+    List<Contact> contacts;
+
+    if (string.IsNullOrWhiteSpace(s)) {
+        contacts = await db.Contacts.ToListAsync();
+    }
+    else {
+        contacts = await db.Contacts.Where(x => 
+                !string.IsNullOrWhiteSpace(x.Name) && x.Name.ToLower().IndexOf(s.ToLower()) >= 0 ||
+                !string.IsNullOrWhiteSpace(x.Email) && x.Email.ToLower().IndexOf(s.ToLower()) >= 0 ||
+                !string.IsNullOrWhiteSpace(x.Phone) && x.Phone.ToLower().IndexOf(s.ToLower()) >= 0 ||
+                !string.IsNullOrWhiteSpace(x.Address) && x.Address.ToLower().IndexOf(s.ToLower()) >= 0)
+                .ToListAsync();
+    }
+
     return Results.Ok(contacts);
 });
 
@@ -51,6 +65,8 @@ app.MapDelete("/api/contacts/{id}", async (int id, ApplicationDBContext db) => {
     return Results.NotFound();
 
 });
+
+
 
 app.Run();
 
