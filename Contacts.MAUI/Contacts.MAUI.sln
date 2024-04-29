@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D2EC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.Plugins.DataStore.InMemory", "Plugins\Contacts.Plugins.DataStore.InMemory\Contacts.Plugins.DataStore.InMemory.csproj", "{6A21E1F0-756E-491F-98D3-ADBB482CAC29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Plugins.DataStore.SQLLite", "Plugins\Contacts.Plugins.DataStore.SQLLite\Contacts.Plugins.DataStore.SQLLite.csproj", "{03514841-910F-4772-9290-40B37114A943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.Plugins.DataStore.SQLLite", "Plugins\Contacts.Plugins.DataStore.SQLLite\Contacts.Plugins.DataStore.SQLLite.csproj", "{03514841-910F-4772-9290-40B37114A943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.WebAPI", "Contacts.WebAPI\Contacts.WebAPI.csproj", "{B6F93F76-D03C-40D8-9012-F1A45E364D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{03514841-910F-4772-9290-40B37114A943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03514841-910F-4772-9290-40B37114A943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03514841-910F-4772-9290-40B37114A943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F93F76-D03C-40D8-9012-F1A45E364D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F93F76-D03C-40D8-9012-F1A45E364D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F93F76-D03C-40D8-9012-F1A45E364D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F93F76-D03C-40D8-9012-F1A45E364D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
