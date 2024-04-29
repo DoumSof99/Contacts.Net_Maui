@@ -34,7 +34,7 @@ namespace Contacts.Plugins.DataStore.SQLLite {
             }
 
             return await this.database.QueryAsync<Contact>(
-                @"SELECT * FROM Contact 
+                @"SELECT * FROM Contacts 
                 WHERE Name LIKE ? 
                 OR Email LIKE ? 
                 OR Phone LIKE ? 

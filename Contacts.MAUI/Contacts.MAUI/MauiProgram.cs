@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 
 using Contacts.Plugins.DataStore.InMemory;
+using Contacts.Plugins.DataStore.SQLLite;
 using Contacts.UseCases.PluginInterfaces;
 using Contacts.UseCases.Interfaces;
 using Contacts.MAUI.Views;
@@ -28,7 +29,8 @@ namespace Contacts.MAUI
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<IContactRepository, ContactInMemoryRepository>();
+            //builder.Services.AddSingleton<IContactRepository, ContactInMemoryRepository>();
+            builder.Services.AddSingleton<IContactRepository, ContactSQLiteRepository>();
             builder.Services.AddSingleton<IViewContactsUseCase, ViewContactsUseCase>();
             builder.Services.AddSingleton<IViewContactUseCase,  ViewContactUseCase>();
             builder.Services.AddTransient<IEditContactUseCase,  EditContactUseCase>();
