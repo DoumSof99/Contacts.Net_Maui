@@ -40,6 +40,18 @@ app.MapPut("/api/contacts/{id}", async (int id, Contact contact, ApplicationDBCo
     return Results.NoContent();
 });
 
+app.MapDelete("/api/contacts/{id}", async (int id, ApplicationDBContext db) => {
+    var contactsToDelete = await db.Contacts.FindAsync(id);
+
+    if (contactsToDelete != null) {
+        db.Contacts.Remove(contactsToDelete);
+        await db.SaveChangesAsync();
+        return Results.Ok(contactsToDelete);
+    }
+    return Results.NotFound();
+
+});
+
 app.Run();
 
 
