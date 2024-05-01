@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Contacts.Plugins.DataStore.WebApi {
     public class Constants {
-        public const string WebApiBaseUrl = "https://localhost:7293/api";
+        public const string WebApiBaseUrl = "http://10.0.2.2:5213/api";
     }
 }

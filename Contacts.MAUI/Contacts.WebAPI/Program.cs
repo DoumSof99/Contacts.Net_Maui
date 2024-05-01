@@ -22,6 +22,11 @@ app.MapPost("/api/contacts", async (Contact contact, ApplicationDBContext db) =>
     await db.SaveChangesAsync();
 });
 
+app.MapGet("/api/contacts/{id}", async (int id, ApplicationDBContext db) => {
+    var contact = db.Contacts.FirstOrDefault(x => x.ContactId == id);
+    return Results.Ok(contact);
+});
+
 app.MapGet("/api/contacts", async ([FromQuery]string? s, ApplicationDBContext db) => {
     List<Contact> contacts;
 
